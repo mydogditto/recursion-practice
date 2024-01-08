@@ -7,3 +7,8 @@
 - This repo requires that the overall function itself is called recursively and pays no attention to subroutines called recursively.
 - Feel free to make pull requests regarding bugs or suggestions
 - Fork it.  You know you want to.
+
+## Git commands
+1) In your terminal, type => git add -A
+2) In your terminl, type => git commit -m "describe the work you have completed"
+3) In your terminal, type => git push
