@@ -13,30 +13,74 @@ var factorial = function(n, product = 1) {
     return product;
   }
        let result = product *= n 
-  return  factorial(n - 1, result, product);
+  return  factorial(n - 1, result);
 
  } 
 
  console.log(3)
-// 2. Compute the sum of an array of integers.
-// Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
-var sum = function(array) {
-};
+// // 2. Compute the sum of an array of integers.
+// // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
+var sum = function(array, num = 0) {
+
+//base
+if(array.length === 0){
+  return num;
+}
+  
+ // recursion 
+  // iterate through the array and add the first number to the num
+  let result = array[0] += num
+
+  // return the function with the array sliced and the num updated
+  return sum(array.slice(1), result)
+}
+console.log(sum([-1, -5, -10, 5, 2]))
+
+
 
 // 3. Sum all numbers in an array containing nested arrays.
 // Example: arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
 };
 
-// 4. Check if a number is even.
-var isEven = function(n) {
+// // 4. Check if a number is even.
+var isEven = function(n, even = false) {
+   //base
+if(!Number.isInteger(n/2)){
+  return even
+}
+  // recursive 
+  if(Number.isInteger(n/2)){
+    even = true
+  
+} else {  
+    return true}
+  return isEven(n-1, even)
 };
+
+
+
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var sumBelow = function(n) {
-};
+var sumBelow = function(n, sum = 0) {
+
+//base
+if(n === 0){
+  return sum;
+
+}
+//recursive 
+if(n > 0){
+  sum += n -1
+  return sumBelow(n-1, sum)
+} else if(n<0){
+ sum += n+1;
+
+return sumBelow(n + 1, sum)
+}
+}
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
