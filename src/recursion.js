@@ -34,7 +34,7 @@ if(array.length === 0){
   // return the function with the array sliced and the num updated
   return sum(array.slice(1), result)
 }
-console.log(sum([-1, -5, -10, 5, 2]))
+
 
 
 
@@ -84,27 +84,107 @@ return sumBelow(n + 1, sum)
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
-};
+var range = function(x, y, array = []) {
+//base case
+if(x === y - 1){
+  return array
+}
+if ( x === y + 1){
+  return array
+}
+if (x === 0 && y === 0){
+  return []
+}
+if (x === y){
+  return []
+}
+
+// //recursion
+// //iterate through the array and push the numbers into the array
+
+if(x < y){
+array.push(x+1)
+
+// iterate till y - 1 is reached 
+return range(x + 1, y, array)
+}
+
+// }; 
+//recursion
+//iterate through the array and push the numbers into the array
+// if x is grater less than y. 
+// push x + 1 into the array
+
+if(x < y){
+array.push(x+1)
+// itterate till y - 1 is reached 
+return range(x + 1, y, array)
+}
+if(x > y){
+  array.push(x - 1)
+  return range(x - 1, y , array)
+}
+
+}
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function(base, exp) {
-};
+var exponent = function(base, exp, total = 0) {
+//base cases 
+if(exp === 0){
+  return 1
+}
 
+
+  //recurstion 
+  //if exp is grater than 1, multiply the base by the base and decrement the exp by 1
+
+ if (exp < 0){
+  return 1/ exponent(base, - exp);
+ }
+ else{ return base * exponent(base, exp -1)
+}
+
+};
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+
+
+  if(n === 0){
+    return false
+  }// if n is a multiplier of 2, return true
+  if(n === 1){
+    return true
+  }
+  if(n > 1){
+    return powerOfTwo(n/2)
+  
+};
 };
 
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function(string) {
+var reverse = function(string, reversedString = "") {
+
+    //base
+  // when string.length is 0, return the new string
+  if(string.length === 0){
+    return reversedString
+  }
+  //recursion
+  // add the last letter of the string to the new string.
+  
+  // return the function with the string sliced and the new string updated.
+  reversedString += string[string.length - 1]
+  return reverse(string.slice(0, string.length - 1), reversedString)
 };
+
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
@@ -123,6 +203,13 @@ var modulo = function(x, y) {
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y) {
+  if(x === 0 || y === 0){
+    return 0
+  }
+  if(x > 1){
+    return y + multiply(x - 1, y)
+  
+};
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
