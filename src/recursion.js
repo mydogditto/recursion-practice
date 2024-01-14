@@ -259,16 +259,14 @@ let compareStr = function(str1, str2) {
 
   // recursion
   // if the first letter of str1 is not equal to the first letter of str2, return false
-  if(str1[0] !== str2[0]){
-      return false
-  }
   if(str1[0] === str2[0]){
-  // if the first letter of str1 is equal to the first letter of str2, slice the first letter off of str1 and str2
-  // return the function with the sliced strings
-  return compareStr(str1.slice(1), str2.slice(1))
-}
+      return true
+  }return compareStr(str1.slice(1), str2.slice(1))
+
 
 }
+
+
 
 
 // 16. Write a function that accepts a string and creates an array where each letter
@@ -522,9 +520,47 @@ var alternateSign = function(array, output= []) {
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str) {
+var numToText = function(str, newString = "") {
+  //base
+  if(str.length === 0){
+    return newString
+  }
+  //recursion
+  //if the first element of the string is a number, replace it with the word equivalent of the number
+if(str[0] === "0"){
+  newString += "zero"
+}
+if(str[0] === "1"){
+  newString += "one"
+}
+if(str[0] === "2"){
+  newString += "two"
+}
+if(str[0] === "3"){
+  newString += "three"
+}
+if(str[0] === "4"){
+  newString += "four"
+}
+if(str[0] === "5"){
+  newString += "five"
+}
+if(str[0] === "6"){
+  newString += "six"
+}
+if(str[0] === "7"){
+  newString += "seven"
+}
+if(str[0] === "8"){
+  newString += "eight"
+}
+if(str[0] === "9"){
+  newString += "nine"
+}
+// recurstion
+// return the function with the sliced string
+return numToText(str.slice(1), newString)
 };
-
 // *** EXTRA CREDIT ***
 
 // 36. Return the number of times a tag occurs in the DOM.
