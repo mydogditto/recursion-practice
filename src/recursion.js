@@ -154,20 +154,19 @@ if(exp === 0){
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
-var powerOfTwo = function(n) {
-
-
-  if(n === 0){
-    return false
-  }// if n is a multiplier of 2, return true
-  if(n === 1){
+var powerOfTwo = function(num) {
+  //base
+  if(num === 1){
     return true
   }
-  if(n > 1){
-    return powerOfTwo(n/2)
-  
+  if(num === 0){
+    return false
+  }
+  //recursion
+
+  return powerOfTwo(num / 2)
 };
-};
+
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function(string, reversedString = "") {
@@ -187,8 +186,25 @@ var reverse = function(string, reversedString = "") {
 
 
 // 10. Write a function that determines if a string is a palindrome.
-var palindrome = function(string) {
-
+//palindrome = same backwards and forwards
+// IGNORE SPACES AND CAPITALIZATION
+var palindrome = function(string){
+  // replace space to have no spaces
+  var newString = string.replace(/ /g, '');
+  // base
+  // if the string is empty, all characters that were sliced have been checked so it is a palindrome
+  if (newString.length === 0){
+    // return true
+    return true;
+  }
+  // if the first value of the string is not the same as the last value of the string
+  if (newString[0].toLowerCase() !== newString[newString.length - 1].toLowerCase()){
+    // return false
+    return false;
+  }
+  // recursion
+  // if the string is "jamie" we slice it at the letter j and e
+  return palindrome(newString.slice(1, newString.length - 1));
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -250,18 +266,17 @@ var gcd = function(x, y) {
 // compareStr('tomato', 'tomato') // true
 let compareStr = function(str1, str2) {
   // base case
-  if(str1.length !== str2.length){
-    return false
-  }
-  if(str1.length === 0 && str2.length === 0){  
+  if(str1.length === 0 && str2.length ===0){
     return true
   }
 
   // recursion
   // if the first letter of str1 is not equal to the first letter of str2, return false
   if(str1[0] === str2[0]){
-      return true
-  }return compareStr(str1.slice(1), str2.slice(1))
+    return compareStr(str1.slice(1), str2.slice(1))
+  } else {
+    return false;
+  }
 
 
 }
@@ -330,7 +345,11 @@ var countOccurrence = function(array, value, number = 0) {
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function(array, callback, output=[]) {
-  
+  if(array.length === 0){
+    return output;
+  }
+  output.push(array[0] * 2);
+  return rMap(array.slice(1), callback, output)
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -430,7 +449,16 @@ var flatten = function(arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function(str, obj) {
+var letterTally = function(str, obj, output = {}) {
+  if(str.length === 0){
+    return output
+  }
+  if (output[str[0]] === undefined){
+    output[str[0]] = 1
+  } else { 
+    output[str[0]] += 1
+  }
+  return letterTally(str.slice(1), obj, output)
 };
 
 var compress = function(list, output = []) {
@@ -497,23 +525,7 @@ var alternateSign = function(array, output= []) {
     output.push(-Math.abs(array[0]))
     return alternateSign(array.slice(1), output)
   }
-    // only push if the proceeding element was not 0 
-  if(array[0] === 0){
-    return alternateSign(array.slice(1), output)
-  }
-    if(array[1] !== 0){
-      output.push(array[0])
-      output.push(-Math.abs(array[0]))
-  
-  // return the function with the sliced array
-  return alternateSign(array.slice(1), output)
-    }
-    else if (array[0] === 0 && array[1] === 0){
-      output.push(array[0])
-      output.push(-Math.abs(array[0]))
-      return alternateSign(array.slice(1), output)
-    }
-};
+}
 
 
 
@@ -521,46 +533,36 @@ var alternateSign = function(array, output= []) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str, newString = "") {
-  //base
   if(str.length === 0){
     return newString
   }
-  //recursion
-  //if the first element of the string is a number, replace it with the word equivalent of the number
-if(str[0] === "0"){
-  newString += "zero"
+
+  if(str[0] === "0"){
+    newString += "zero"
+  } else if(str[0] === "1"){
+    newString += "one"
+ 
+} else if(str[0] === "2"){
+    newString += "two"
+} else if(str[0] === "3"){
+    newString += "three"
+} else if(str[0] === "4"){
+    newString += "four"
+} else if(str[0] === "5"){
+    newString += "five"
+} else if(str[0] === "6"){
+    newString += "six"
+} else if(str[0] === "7"){
+    newString += "seven"
+} else if(str[0] === "8"){
+    newString += "eight"
+} else if(str[0] === "9"){
+    newString += "nine"
+} else {
+    newString += str[0]
+}  
+  return numToText(str.slice(1), newString)
 }
-if(str[0] === "1"){
-  newString += "one"
-}
-if(str[0] === "2"){
-  newString += "two"
-}
-if(str[0] === "3"){
-  newString += "three"
-}
-if(str[0] === "4"){
-  newString += "four"
-}
-if(str[0] === "5"){
-  newString += "five"
-}
-if(str[0] === "6"){
-  newString += "six"
-}
-if(str[0] === "7"){
-  newString += "seven"
-}
-if(str[0] === "8"){
-  newString += "eight"
-}
-if(str[0] === "9"){
-  newString += "nine"
-}
-// recurstion
-// return the function with the sliced string
-return numToText(str.slice(1), newString)
-};
 // *** EXTRA CREDIT ***
 
 // 36. Return the number of times a tag occurs in the DOM.
